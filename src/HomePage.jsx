@@ -1,6 +1,45 @@
 import ProductCard from "./ProductCard";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 
 export default function HomePage() {
+
+    const [products, setProducts] = useState([]);
+
+    // useEffect: an effect is someting outside of the DOM
+    // takes two arguments:
+    // argument 1: effect function (in otherwords it is the effect)
+    // argument 2: what triggers the effect - an array of variables or states
+    // if empty array, the effect will happen on the first render of the component
+    // it is similiar to DOMContentLoaded
+    useEffect(function () {
+        //because we cannot use async function for the effect, ot use await
+        // in the effect, we must declare an async functio nand then call it
+        async function fetchData() {
+            // when we refer to static URL (i.e. image, CSS file, JS file, JSON file)
+            // it will always default to the public folder
+            const response = await axios.get("products.json");
+            setProducts(response.data);
+        }
+        fetchData();
+
+
+
+    }, [])
+
+    const productJSX = [];
+    products.forEach((product) => {
+        productJSX.push(
+            <div className="col-md-3 mb-4" key={product.id}>
+                <ProductCard name={product.name}
+                    imageUrl={product.imageUrl}
+                    price={product.price}
+                />
+            </div>
+        );
+    });
+
     return (<>
         <div className="container">
             <header className="bg-primary text-white text-center py-5">
@@ -14,30 +53,7 @@ export default function HomePage() {
             <main className="container my-5">
                 <h2 className="text-center mb-4">Featured Products</h2>
                 <div className="row">
-                    <div className="col-md-3 mb-4">
-                        <ProductCard name="Laptop"
-                            imageUrl="https://picsum.photos/id/20/300/200"
-                            price={19.99}
-                        />
-                    </div>
-                    <div className="col-md-3 mb-4">
-                        <ProductCard name="Screwdriver"
-                            imageUrl="https://picsum.photos/id/26/300/200"
-                            price={29.99}
-                        />
-                    </div>
-                    <div className="col-md-3 mb-4">
-                        <ProductCard name="Hammer"
-                            imageUrl="https://picsum.photos/id/96/300/200"
-                            price={39.99}
-                        />
-                    </div>
-                    <div className="col-md-3 mb-4">
-                        <ProductCard name="Wrench"
-                            imageUrl="https://picsum.photos/id/100/300/200"
-                            price={49.99}
-                        />
-                    </div>
+                    {productJSX}
                 </div>
             </main>
         </div>

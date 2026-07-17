@@ -1,9 +1,62 @@
+import ProductCard from "./ProductCard";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export default function ProductPage() {
+    const [products, setProducts] = useState([]);
+    useEffect(function () {
+        async function fetchData() {
+            const response = await axios.get("products.json");
+            setProducts(response.data);
+        }
+        fetchData();
+    }, []);
+    // const products = [
+    //     {
+    //         "id": 1,
+    //         "name": "Sleek Smartwatch",
+    //         "price": 199.99,
+    //         "imageUrl": "https://picsum.photos/id/20/300/200"
+    //     },
+    //     {
+    //         "id": 2,
+    //         "name": "GoPro Camera",
+    //         "price": 299.99,
+    //         "imageUrl": "https://picsum.photos/id/21/300/200"
+    //     },
+    //     {
+    //         "id": 3,
+    //         "name": "Mini Laptop",
+    //         "price": 299.99,
+    //         "imageUrl": "https://picsum.photos/id/22/300/200"
+    //     },
+    //     {
+    //         "id": 4,
+    //         "name": "Portable Projector",
+    //         "price": 399.99,
+    //         "imageUrl": "https://picsum.photos/id/23/300/200"
+    //     }
+    // ]
     return (<>
-        <div className = "container">
-            <h1>Product Page</h1>
+        <div className="container">
+            <h1>Our Products</h1>
+            <div className="row">
+                {
+                    products.map((p) => {
+                        return (
+                            <div className="col-md-3 mb-4" key={p.id}>
+                                <ProductCard
+                                    name={p.name}
+                                    price={p.price}
+                                    imageUrl={p.imageUrl}
+                                />
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
-    </>) 
+    </>)
 
 
 }
