@@ -10,7 +10,10 @@ export default function ProductCard(props) {
             <div className="card-body">
                 <h5 className="card-title">{props.name}</h5>
                 <p className="card-text">${props.price.toFixed(2)}</p>
-                <a href="#" className="btn btn-primary">Add to Cart</a>
+                <button className="btn btn-primary"
+                    onClick={props.onAddToCart}>
+                    Add to Cart
+                </button>
             </div>
         </div>
     </>
