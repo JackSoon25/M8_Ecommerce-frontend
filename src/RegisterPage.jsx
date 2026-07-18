@@ -3,6 +3,7 @@ import { Formik, Field, Form, ErrorMessage } from 'formik';
 // * means Everything. as Yup, means to import everything to Yup
 import * as Yup from 'yup';
 import { useLocation } from 'wouter';
+import { useFlashMessage } from './FlashMessageStore'
 
 const validationSchema = Yup.object({
     name: Yup.string().required("Name is required").min(2, "The name must be at least 2 characters."),
@@ -18,6 +19,7 @@ export default function RegisterPage() {
 
     // if don't need location, can leave it empty, and just write [, setLocation]
     const [, setLocation] = useLocation();
+    const { showMessage } = useFlashMessage();
 
     // API endpoint that returns all the possible marketing perferences
     const marketingPreferences = [
@@ -53,12 +55,15 @@ export default function RegisterPage() {
         // indicate that the form is in process of being submitted
         // false means to disable submittion
         formikHelpers.setSubmitting(true);
-        alert("Form submitted");
+        // alert("Form submitted");
         setTimeout(function () {
             console.log("The form has finished processing");
             // enable button submission
             formikHelpers.setSubmitting(false);
             // TODO: have an if statement ot see if the form has been submitted properly.
+
+            // show the flash message
+            showMessage("You have signed up successfully.", "success");
             setLocation("/");
         }, 3000)
     }
