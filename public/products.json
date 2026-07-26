@@ -1,26 +1,26 @@
 [
     {
         "id": 1,
-        "name": "Sleek Smartwatch",
-        "price": 199.99,
-        "imageUrl": "https://picsum.photos/id/20/300/200"
+        "name": "Tea Pot",
+        "price": 19.99,
+        "imageUrl": "https://picsum.photos/id/225/1500/979"
     },
     {
         "id": 2,
-        "name": "GoPro Camera",
-        "price": 299.99,
-        "imageUrl": "https://picsum.photos/id/21/300/200"
+        "name": "Old Style Camera",
+        "price": 500,
+        "imageUrl": "https://picsum.photos/id/250/4928/3264"
     },
     {
         "id": 3,
-        "name": "Mini Laptop",
-        "price": 299.99,
-        "imageUrl": "https://picsum.photos/id/22/300/200"
+        "name": "Laptop",
+        "price": 1299.99,
+        "imageUrl": "https://picsum.photos/id/8/5000/3333"
     },
     {
         "id": 4,
-        "name": "Portable Projector",
-        "price": 399.99,
-        "imageUrl": "https://picsum.photos/id/23/300/200"
+        "name": "Bicycle",
+        "price": 199.99,
+        "imageUrl": "https://picsum.photos/id/76/4912/3264"
     }
 ]

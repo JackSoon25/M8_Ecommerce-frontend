@@ -29,7 +29,7 @@ export default function ShoppingCart() {
                                 </p>
                             </div>
                             <div>
-                                <img src={item.imageUrl} />
+                                <img src={item.imageUrl} className="cart-item-img" alt={item.name} />
                             </div>
                             <div>
                                 ${(item.price * item.quantity).toFixed(2)}
