@@ -1,11 +1,15 @@
 import ProductCard from "./ProductCard";
 import axios from "axios";
 import { useEffect, useState } from "react";
-
+import { useFlashMessage } from "./FlashMessageStore";
+import { Link } from "wouter";
+import { useCart } from "./CartStore";
 
 export default function HomePage() {
 
     const [products, setProducts] = useState([]);
+    const { addToCart } = useCart();
+    const { showMessage } = useFlashMessage();
 
     // useEffect: an effect is someting outside of the DOM
     // takes two arguments:
@@ -35,7 +39,14 @@ export default function HomePage() {
                 <ProductCard name={product.name}
                     imageUrl={product.imageUrl}
                     price={product.price}
-                />
+                    onAddToCart={() => {
+                        addToCart(product);
+                        // showMessage("Product added to shopping cart successfully.", "success");
+                        showMessage(<div>
+                            Product added to shopping cart successfully.
+                            <Link href="/cart" className="btn btn-primary btn-sm">Go to cart</Link>
+                        </div>, "success");
+                    }} />
             </div>
         );
     });
